@@ -3,7 +3,7 @@ import { useRef } from 'react';
 
 export const useRenderHighlight = (className: string) => {
   // TODO* fix any
-  const ref = useRef<HTMLElement | null>(null);
+  const ref = useRef<HTMLLIElement>(null);
 
   if (ref.current) {
     ref.current.classList.add(className);
