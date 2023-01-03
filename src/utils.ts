@@ -2,7 +2,7 @@
 import { useRef } from 'react';
 
 export const useRenderHighlight = (className: string) => {
-  // TODO fix any
+  // TODO* fix any
   const ref = useRef<HTMLElement | null>(null);
 
   if (ref.current) {
@@ -17,7 +17,7 @@ export const useRenderHighlight = (className: string) => {
   return ref;
 };
 
-// TODO fix any
+// TODO* fix any
 export const range = <T>(n: number, fn: (n: number) => T): T[] => {
   const result = [];
   for (let i = 0; i < n; i++) {
@@ -26,8 +26,8 @@ export const range = <T>(n: number, fn: (n: number) => T): T[] => {
   return result;
 };
 
-// TODO fix any
-export const chooseRandomly = <T>(items: T[]) => {
+// TODO* fix any
+export const chooseRandomly = <T>(items: readonly T[]) => {
   const index = Math.floor(Math.random() * items.length);
   return items[index];
 };
