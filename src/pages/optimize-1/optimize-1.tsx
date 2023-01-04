@@ -9,18 +9,22 @@ const todosData = [
   { id: 3, text: 'swim with a fish', done: false },
 ];
 
-// TODO Fix all list re-rendering when only one component is changed :(
+//* TODO Fix all list re-rendering when only one component is changed :(
 
 interface TodoProps {
   text: string;
   done: boolean;
-  onClick: () => void;
+  id: number;
+  onClick: (id: number) => void;
 }
 
-const Todo = memo(({ text, done, onClick }: TodoProps) => {
+const Todo = memo(({ text, done, onClick, id }: TodoProps) => {
   const ref = useRenderHighlight(css.render);
+
+  const handleTodoClick = () => onClick(id);
+
   return (
-    <li ref={ref} onClick={onClick} className={css.listItem}>
+    <li ref={ref} onClick={handleTodoClick} className={css.listItem}>
       {done ? '[x]' : '[ ]'} {text}
     </li>
   );
@@ -29,12 +33,11 @@ const Todo = memo(({ text, done, onClick }: TodoProps) => {
 export const Optimize1 = () => {
   const [todos, setTodos] = useState(todosData);
 
-  const handleTodoClick = useCallback(
-    (id: number) => {
-      setTodos(todos.map((todo) => (todo.id === id ? { ...todo, done: !todo.done } : todo)));
-    },
-    [todos],
-  );
+  const handleTodoClick = useCallback((id: number) => {
+    setTodos((prevTodos) =>
+      prevTodos.map((todo) => (todo.id === id ? { ...todo, done: !todo.done } : todo)),
+    );
+  }, []);
 
   return (
     <CenteredLayout className="gap-4">
@@ -44,9 +47,10 @@ export const Optimize1 = () => {
         {todos.map((item) => (
           <Todo
             key={item.id}
+            id={item.id}
             text={item.text}
             done={item.done}
-            onClick={() => handleTodoClick(item.id)}
+            onClick={handleTodoClick}
           />
         ))}
       </ul>

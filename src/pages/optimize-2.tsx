@@ -15,7 +15,6 @@ export const Optimize2 = () => {
   const [scrollTop, setScrollTop] = useState(0);
 
   const handleScroll = useCallback(() => {
-    console.log('from callback');
     setScrollTop(window.scrollY);
   }, []);
 
@@ -25,7 +24,6 @@ export const Optimize2 = () => {
     //   setScrollTop(window.scrollY);
     // }; old code
 
-    console.log('from use effect')
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => {
