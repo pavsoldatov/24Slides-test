@@ -7,6 +7,8 @@ const items = untypedItems as Item[];
 const ranges = untypedRanges as Range[];
 
 const transform = (items: Item[]) => {
+  //* TODO implement
+
   const ranges: Range[] = [];
 
   let startDate = items[0].date;
