@@ -20,11 +20,8 @@ interface TodoProps {
 
 const Todo = memo(({ text, done, onClick, id }: TodoProps) => {
   const ref = useRenderHighlight(css.render);
-
-  const handleTodoClick = () => onClick(id);
-
   return (
-    <li ref={ref} onClick={handleTodoClick} className={css.listItem}>
+    <li ref={ref} onClick={() => onClick(id)} className={css.listItem}>
       {done ? '[x]' : '[ ]'} {text}
     </li>
   );
