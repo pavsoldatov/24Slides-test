@@ -7,7 +7,26 @@ const items = untypedItems as Item[];
 const ranges = untypedRanges as Range[];
 
 const transform = (items: Item[]) => {
-  // TODO implement
+  const ranges: Range[] = [];
+
+  let startDate = items[0].date;
+
+  for (let i = 0; i < items.length; i++) {
+    const current = items[i];
+    const next = items[i + 1];
+
+    const isRangeEnd = !next || current.color !== next.color;
+
+    if (isRangeEnd) {
+      ranges.push({
+        start: startDate,
+        end: current.date,
+        color: current.color,
+      });
+
+      startDate = next ? next.date : current.date;
+    }
+  }
 
   return ranges;
 };
