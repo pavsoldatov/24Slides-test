@@ -1,31 +1,32 @@
 import clsx from 'clsx';
-import { useState } from 'react';
+import { useState, ComponentPropsWithoutRef } from 'react';
 import { CenteredLayout } from '~/components';
 
-// TODO is there a way to not write this twice? =\
-type ButtonType = 'fast' | 'quality' | 'cheap';
+//* TODO is there a way to not write this twice? =\
 
-const buttons: ButtonType[] = ['fast', 'quality', 'cheap'];
+const buttons = ['fast', 'quality', 'cheap'] as const;
+type ButtonType = typeof buttons[number];
 
-interface ButtonProps {
-  button: ButtonType;
+interface ButtonProps extends ComponentPropsWithoutRef<'button'> {
+  buttonVariant: ButtonType;
   selectedButton: ButtonType | null;
-  setSelectedButton: (value: ButtonType) => void;
+  onSelectButton: (value: ButtonType) => void;
 }
 
-// TODO is it possible to improve this component's interface (props)?
-const Button = ({ button, selectedButton, setSelectedButton }: ButtonProps) => {
-  const style = button === selectedButton;
+//* TODO is it possible to improve this component's interface (props)?
+const Button = ({ buttonVariant, selectedButton, onSelectButton, ...props }: ButtonProps) => {
+  const isSelected = buttonVariant === selectedButton;
   return (
     <button
-      key={button}
-      onClick={() => setSelectedButton(button)}
+      key={buttonVariant}
+      onClick={() => onSelectButton(buttonVariant)}
       className={clsx(
         'h-10 px-5 flex items-center justify-center rounded transition-colors',
-        style ? 'bg-green-400' : 'bg-gray-300',
+        isSelected ? 'bg-green-400' : 'bg-gray-300',
       )}
+      {...props}
     >
-      {button}
+      {buttonVariant}
     </button>
   );
 };
@@ -39,9 +40,9 @@ export const Refactor1 = () => {
         {buttons.map((button) => (
           <Button
             key={button}
-            button={button}
+            buttonVariant={button}
             selectedButton={selectedButton}
-            setSelectedButton={setSelectedButton}
+            onSelectButton={setSelectedButton}
           />
         ))}
       </div>
