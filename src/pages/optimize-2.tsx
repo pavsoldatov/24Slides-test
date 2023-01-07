@@ -5,10 +5,10 @@ import { CenteredLayout } from '~/components';
 // by changing component structure ?
 
 const now = performance.now();
-const ExpensiveComponent = () => {
+const ExpensiveComponent = memo(() => {
   while (performance.now() - now < 100) {}
   return <div>Ohh.. so expensive</div>;
-};
+});
 
 export const Optimize2 = () => {
   const [scrollTop, setScrollTop] = useState(0);
