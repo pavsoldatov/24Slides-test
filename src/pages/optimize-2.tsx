@@ -1,13 +1,13 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState, memo } from 'react';
 import { CenteredLayout } from '~/components';
 
 //* TODO how can we optimize, prevent re-rendering ExpensiveComponent
 
-const ExpensiveComponent = () => {
-  const now = useMemo(() => performance.now(), []);
+const ExpensiveComponent = memo(() => {
+  const now = performance.now();
   while (performance.now() - now < 100) {}
   return <div>Ohh.. so expensive</div>;
-};
+});
 
 export const Optimize2 = () => {
   const [scrollTop, setScrollTop] = useState(0);
