@@ -1,5 +1,5 @@
 import { Outlet, ReactLocation, Route, Router } from '@tanstack/react-location';
-import { CenteredLayout } from '~/components';
+import { CenteredLayout, FlexWrapper, Main } from '~/components';
 import { Optimize1, Optimize2, Ranges, Refactor1, Refactor2 } from '~/pages';
 import { Header } from './header';
 
@@ -41,7 +41,11 @@ const routes: Route[] = [
 
 export const App = () => (
   <Router location={reactLocation} routes={routes}>
-    <Header />
-    <Outlet />
+    <FlexWrapper>
+      <Header />
+      <Main>
+        <Outlet />
+      </Main>
+    </FlexWrapper>
   </Router>
 );
