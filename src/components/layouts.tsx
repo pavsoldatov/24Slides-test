@@ -10,7 +10,7 @@ export const FlexWrapper = ({
 }) => <div className={clsx('flex flex-col align-center min-h-screen', className)}>{children}</div>;
 
 export const Main = ({ className, children }: { className?: string; children: ReactNode }) => (
-  <div className={clsx('flex-1 flex flex-col', className)}>{children}</div>
+  <main className={clsx('flex-1 flex flex-col', className)}>{children}</main>
 );
 
 export const CenteredLayout = ({
@@ -24,7 +24,7 @@ export const CenteredLayout = ({
   // scroll height seems bugged :\
   <div
     className={clsx(
-      'flex-1 flex flex-col items-center justify-center pb-32 text-slate-700',
+      'flex-1 flex flex-col items-center justify-center text-slate-700',
       className,
     )}
   >

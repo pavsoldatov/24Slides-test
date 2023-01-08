@@ -1,0 +1,4 @@
+{
+  "/v1/annotations": "/annotations",
+  "/v1/annotations/:id": "/annotations/:id"
+}

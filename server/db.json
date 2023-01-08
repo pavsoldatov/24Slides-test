@@ -1,0 +1,15 @@
+{
+  "annotations": [
+    {
+      "id": 1,
+      "body": "A quick brown fox jumped over the lazy dog",
+      "type": "image"
+    },
+    {
+      "id": 2,
+      "src": "asdas",
+      "body": "A quick brown fox jumped over the lazy dog",
+      "type": "text"
+    }
+  ]
+}

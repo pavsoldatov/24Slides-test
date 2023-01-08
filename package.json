@@ -4,10 +4,12 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "concurrently": "concurrently \"npm run server\" \"npm run dev\"",
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "lint": "eslint --fix '*.cjs' './src/**/*.ts*'"
+    "lint": "eslint --fix '*.cjs' './src/**/*.ts*'",
+    "server": "json-server -w server/db.json -p 3001 -d 350 --routes server/routes.json"
   },
   "dependencies": {
     "@tanstack/react-location": "^3.7.4",
@@ -45,5 +47,8 @@
     "trailingComma": "all",
     "singleQuote": true,
     "printWidth": 100
+  },
+  "devDependencies": {
+    "concurrently": "^7.6.0"
   }
 }
