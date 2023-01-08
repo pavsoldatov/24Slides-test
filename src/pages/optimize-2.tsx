@@ -24,7 +24,7 @@ export const Optimize2 = () => {
 
   return (
     <div className="h-[1000vh] bg-gradient-to-tr from-gray-100 to-gray-200 bg-repeat bg-[length:100%_8px]">
-      <CenteredLayout className="gap-4 fixed top-0 left-1/2 -translate-x-1/2">
+      <CenteredLayout className="gap-4 fixed left-1/2 top-1/4 -translate-x-1/2">
         <div className="text-3xl">See the code</div>
         <div>{scrollTop} px</div>
         <ExpensiveComponent />
