@@ -1,4 +1,2 @@
-
 export * from './Annotations';
-export * from './MouseIcon';
-export * from './CrossIcon';
+export * from './Icons';
