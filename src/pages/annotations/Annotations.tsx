@@ -1,7 +1,8 @@
 import clsx from 'clsx';
-import { MouseEvent, useState, SyntheticEvent } from 'react';
+import { MouseEvent, useState, SyntheticEvent, useRef } from 'react';
 import { CenteredLayout } from '~/components';
 import { MouseIcon, CrossIcon, SendIcon } from '~/pages/annotations';
+import css from './AnnotationsForm.module.scss';
 
 export const Annotations = () => {
   const [dimensions, setDimensions] = useState({
@@ -21,13 +22,18 @@ export const Annotations = () => {
 
   const handleClick = (e: MouseEvent) => {
     setAnnotation({
-      isActive: true,
-      x: (e.nativeEvent.offsetX / dimensions.width) * 100,
-      y: (e.nativeEvent.offsetY / dimensions.height) * 100,
+      ...annotation,
+      isActive: false,
     });
+
+    if (!annotation.isActive) {
+      setAnnotation({
+        isActive: !annotation.isActive,
+        x: (e.nativeEvent.offsetX / dimensions.width) * 100,
+        y: (e.nativeEvent.offsetY / dimensions.height) * 100,
+      });
+    }
   };
-  console.log('x ', annotation.x);
-  console.log('y: ', annotation.y);
 
   return (
     <div className="flex-1 bg-[#1E1E1E] flex">
@@ -49,30 +55,37 @@ export const Annotations = () => {
               alt="Sunset behind the sea"
               className="object-contain cursor-cell"
             />
-            <div
-              className="absolute -translate-x-1/2 -translate-y-1/2 text-slate-200 rounded-full h-11 w-11 flex items-center justify-center bg-[#EF7058;] drop-shadow border border-solid border-neutral-600"
-              style={{ left: annotation.x + '%', top: annotation.y + '%' }}
-            >
-              <p className="font-bold">1</p>
-            </div>
-            <form
-              className={clsx(
-                'absolute flex -translate-x-1/2 -translate-y-1/2 transition-all',
-                'flex justify-between min-w-[300px] p-1.5 text-neutral-900 text-sx',
-                'bg-white drop-shadow border-[1px] border-solid border-[#EFEFF0] rounded',
-                annotation.isActive ? 'visible' : 'invisible',
-              )}
-              style={{
-                top: `${annotation.y + 10}%`,
-                left: `${annotation.x}%`,
-              }}
-            >
-              <div className="absolute -top-[4px] left-[50%] -translate-x-1/2 -translate-y-1/2  border-l-[10px] border-l-transparent border-b-[12px] border-b-white border-r-[10px] border-r-transparent" />
-              <input placeholder="Leave a comment" className="p-1 text-sm border-b-[2px] border-b-[#9398A2] outline-none" />
-              <button type="submit" className="p-2 rounded-full hover:bg-neutral-200 active:bg-neutral-300">
-                <SendIcon />
-              </button>
-            </form>
+            {
+              <div
+                className={clsx(
+                  css.annotation,
+                  'Annotation text-slate-200 drop-shadow',
+                  annotation.isActive ? css.fadeIn : css.fadeOut,
+                )}
+                style={{ left: annotation.x + '%', top: annotation.y + '%' }}
+              >
+                <p className="font-bold">1</p>
+                <form
+                  className={clsx(
+                    'absolute -translate-x-1/2 -translate-y-1/2 top-[84px] left-[50%]',
+                    'flex justify-between gap-[24px] min-w-[360px] px-6 py-4 text-neutral-900 text-sx',
+                    'bg-white drop-shadow border-[1px] border-solid border-[#EFEFF0] rounded',
+                  )}
+                >
+                  <div className="absolute -top-[4px] left-[50%] -translate-x-1/2 -translate-y-1/2  border-l-[10px] border-l-transparent border-b-[12px] border-b-white border-r-[10px] border-r-transparent" />
+                  <input
+                    placeholder="Leave a comment"
+                    className="w-full p-1 text-sm border-b-[2px] border-b-[#C9CBD0] outline-none"
+                  />
+                  <button
+                    type="submit"
+                    className="p-2 rounded-full hover:bg-neutral-200 active:bg-neutral-300"
+                  >
+                    <SendIcon />
+                  </button>
+                </form>
+              </div>
+            }
           </div>
         </div>
         <p className="text-xs md:text-base self-start text-[#909090]">
