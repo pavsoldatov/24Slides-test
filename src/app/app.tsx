@@ -1,7 +1,7 @@
 import { Outlet, ReactLocation, Route, Router } from '@tanstack/react-location';
+import { Header } from '~/app';
 import { CenteredLayout, FlexWrapper, Main } from '~/components';
 import { Annotations, Optimize1, Optimize2, Ranges, Refactor1, Refactor2 } from '~/pages';
-import { Header } from './header';
 
 const Welcome = () => (
   <CenteredLayout className="gap-4">
