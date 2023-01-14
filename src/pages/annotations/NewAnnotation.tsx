@@ -20,7 +20,7 @@ interface NewAnnotationProps {
   onSetAnnotation: Dispatch<SetStateAction<AnnotationType>>;
   pendingCreation: boolean;
   annotation: Omit<AnnotationType, 'id'>;
-  number?: number;
+  number: number;
 }
 
 export const NewAnnotation = ({
@@ -32,10 +32,9 @@ export const NewAnnotation = ({
   const coords = { x: annotation.x * 100 + '%', y: annotation.y * 100 + '%' };
   const mutation = useCreateAnnotation();
 
-  const [isOpen, setIsOpen] = useState(true);
-
   const [text, setText] = useState('');
   const deferredText = useDeferredValue(text);
+
   const handleTextChange = (e: ChangeEvent<HTMLInputElement>) => setText(e.target.value);
 
   const handleCreate = (e: FormEvent<HTMLFormElement>) => {
@@ -52,9 +51,9 @@ export const NewAnnotation = ({
   return (
     <>
       {pendingCreation && (
-        <Wrapper isOpen={isOpen} x={coords.x} y={coords.y}>
-          <CircleButton number={number} />
-          <Panel isOpen={isOpen}>
+        <Wrapper isElevated={true} x={coords.x} y={coords.y}>
+          <CircleButton number={number} onOpen={onSetPendingCreation} />
+          <Panel isOpen={true}>
             <form onSubmit={handleCreate} className="flex justify-between gap-[24px]">
               <input
                 id="comment"

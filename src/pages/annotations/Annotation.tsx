@@ -3,7 +3,7 @@ import { AnnotationType, AnnotationContent, CircleButton, Wrapper, Panel } from 
 
 export interface AnnotationProps {
   annotation: AnnotationType;
-  index?: number;
+  index: number;
 }
 
 //* Creation phase logic exists only on client
@@ -17,7 +17,7 @@ export const Annotation = ({ annotation, index }: AnnotationProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <Wrapper isOpen={isOpen} x={coords.x} y={coords.y}>
+    <Wrapper isElevated={isOpen} x={coords.x} y={coords.y}>
       <CircleButton onOpen={setIsOpen} number={index} />
       <Panel isOpen={isOpen}>
         <AnnotationContent text={annotation.text} id={annotation.id} />

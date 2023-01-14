@@ -41,7 +41,6 @@ export const Annotations = () => {
   const [pendingCreation, setPendingCreation] = useState(false);
 
   const [annotation, setAnnotation] = useState<AnnotationType>({
-    id: annotations?.length,
     text: '',
     x: 0,
     y: 0,
@@ -67,7 +66,7 @@ export const Annotations = () => {
             />
             {annotations && (
               <NewAnnotation
-                number={annotations?.length + 1}
+                number={annotations.length + 1}
                 annotation={annotation}
                 onSetAnnotation={setAnnotation}
                 pendingCreation={pendingCreation}
