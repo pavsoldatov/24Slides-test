@@ -18,7 +18,7 @@ export const Annotation = ({ annotation, index }: AnnotationProps) => {
 
   return (
     <Wrapper isElevated={isOpen} x={coords.x} y={coords.y}>
-      <CircleButton onOpen={setIsOpen} number={index} />
+      <CircleButton onOpen={() => setIsOpen(!isOpen)} number={index} />
       <Panel isOpen={isOpen}>
         <AnnotationContent text={annotation.text} id={annotation.id} />
       </Panel>

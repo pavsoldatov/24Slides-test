@@ -1,20 +1,14 @@
 import clsx from 'clsx';
 import { useState, SyntheticEvent, MouseEvent, Dispatch, SetStateAction } from 'react';
-import { AnnotationType } from '~/pages';
+import annotations from '~/api/annotations';
+import { NewAnnotationType } from '~/pages';
 
 interface ImageProps {
-  annotation: AnnotationType;
-  onSetAnnotation: Dispatch<SetStateAction<AnnotationType>>;
-  onSetPendingCreation: Dispatch<SetStateAction<boolean>>;
-  pendingCreation: boolean;
+  newAnnotation: NewAnnotationType;
+  onSetNewAnnotation: Dispatch<SetStateAction<NewAnnotationType>>;
 }
 
-export const Image = ({
-  pendingCreation,
-  onSetPendingCreation,
-  annotation,
-  onSetAnnotation,
-}: ImageProps) => {
+export const Image = ({ newAnnotation, onSetNewAnnotation }: ImageProps) => {
   const [dimensions, setDimensions] = useState({ height: 0, width: 0 });
 
   const handleDimensions = (e: SyntheticEvent<HTMLImageElement>) =>
@@ -24,20 +18,23 @@ export const Image = ({
     });
 
   const addAnnotationHandler = (e: MouseEvent) => {
-    onSetPendingCreation(!pendingCreation);
+    onSetNewAnnotation({ ...newAnnotation, isActive: false });
 
-    onSetAnnotation({
-      ...annotation,
-      x: e.nativeEvent.offsetX / dimensions.width,
-      y: e.nativeEvent.offsetY / dimensions.height,
-    });
+    if (!newAnnotation.isActive) {
+      onSetNewAnnotation({
+        ...newAnnotation,
+        isActive: true,
+        x: e.nativeEvent.offsetX / dimensions.width,
+        y: e.nativeEvent.offsetY / dimensions.height,
+      });
+    }
   };
 
   return (
     <img
       className={clsx(
         'object-contain min-h-[535px]',
-        pendingCreation ? 'cursor-auto' : 'cursor-cell',
+        newAnnotation.isActive ? 'cursor-auto' : 'cursor-cell',
       )}
       onClick={addAnnotationHandler}
       onLoad={handleDimensions}

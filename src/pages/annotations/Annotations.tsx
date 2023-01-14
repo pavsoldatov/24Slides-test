@@ -35,17 +35,22 @@ export type AnnotationType = {
   id?: number;
 };
 
+export type NewAnnotationType = {
+  text: string;
+  x: number;
+  y: number;
+  isActive?: boolean;
+};
+
 export const Annotations = () => {
   const { data: annotations } = useAnnotations();
 
-  const [pendingCreation, setPendingCreation] = useState(false);
-
-  const [annotation, setAnnotation] = useState<AnnotationType>({
+  const [newAnnotation, setNewAnnotation] = useState<NewAnnotationType>({
+    isActive: false,
     text: '',
     x: 0,
     y: 0,
   });
-  console.log(annotations?.length);
 
   return (
     <div className="flex-1 bg-[#1E1E1E] flex">
@@ -58,19 +63,12 @@ export const Annotations = () => {
         </section>
         <section className="bg-[#2A2A2A] flex justify-center align-center w-full">
           <div className="relative flex">
-            <Image
-              annotation={annotation}
-              onSetAnnotation={setAnnotation}
-              pendingCreation={pendingCreation}
-              onSetPendingCreation={setPendingCreation}
-            />
+            <Image newAnnotation={newAnnotation} onSetNewAnnotation={setNewAnnotation} />
             {annotations && (
               <NewAnnotation
                 number={annotations.length + 1}
-                annotation={annotation}
-                onSetAnnotation={setAnnotation}
-                pendingCreation={pendingCreation}
-                onSetPendingCreation={setPendingCreation}
+                newAnnotation={newAnnotation}
+                onSetNewAnnotation={setNewAnnotation}
               />
             )}
             {annotations &&

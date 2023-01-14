@@ -1,6 +1,6 @@
 import { useQuery, useQueryClient, useMutation } from '@tanstack/react-query';
 import axios from '../../api/annotations';
-import { AnnotationType } from './Annotations';
+import { AnnotationType, NewAnnotationType } from './Annotations';
 
 const fetchAnnotations = (): Promise<AnnotationType[]> =>
   axios.get('/annotations').then((response) => response.data);
@@ -22,7 +22,7 @@ export const useAnnotation = (annotationId: number) => {
   });
 };
 
-const createAnnotation = (newAnnotation: AnnotationType) =>
+const createAnnotation = (newAnnotation: NewAnnotationType) =>
   axios.post('/annotations', newAnnotation);
 
 export const useCreateAnnotation = () => {
@@ -31,7 +31,7 @@ export const useCreateAnnotation = () => {
   return useMutation({
     mutationFn: createAnnotation,
     onSuccess: (data, variables) => {
-      queryClient.setQueryData(['annotation', { id: variables.id }], data);
+      queryClient.setQueryData(['annotation', variables], data);
     },
   });
 };
