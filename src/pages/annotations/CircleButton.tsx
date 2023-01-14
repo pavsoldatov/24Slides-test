@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction } from 'react';
 
 interface CircleButtonProps {
   onOpen?: Dispatch<SetStateAction<boolean>>;
-  number: number;
+  number?: number;
 }
 
 export const CircleButton = ({ number, onOpen }: CircleButtonProps) => {

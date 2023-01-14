@@ -7,8 +7,6 @@ interface ImageProps {
   onSetAnnotation: Dispatch<SetStateAction<AnnotationType>>;
   onSetPendingCreation: Dispatch<SetStateAction<boolean>>;
   pendingCreation: boolean;
-  onSetIsActive: Dispatch<SetStateAction<boolean>>;
-  isActive: boolean;
 }
 
 export const Image = ({
@@ -16,8 +14,6 @@ export const Image = ({
   onSetPendingCreation,
   annotation,
   onSetAnnotation,
-  onSetIsActive,
-  isActive,
 }: ImageProps) => {
   const [dimensions, setDimensions] = useState({ height: 0, width: 0 });
 
@@ -28,10 +24,7 @@ export const Image = ({
     });
 
   const addAnnotationHandler = (e: MouseEvent) => {
-    // onSetPendingCreation(false);
-    onSetIsActive(true);
-
-    onSetPendingCreation(true);
+    onSetPendingCreation(!pendingCreation);
 
     onSetAnnotation({
       ...annotation,

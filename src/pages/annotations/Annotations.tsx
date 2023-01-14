@@ -1,7 +1,6 @@
-import { useState, useEffect, useCallback } from 'react';
-
+import { useState } from 'react';
 import { CenteredLayout } from '~/components';
-import { MouseIcon, CrossIcon, Annotation, Image, NewAnnotation } from '~/pages';
+import { MouseIcon, CrossIcon, Annotation, Image, NewAnnotation, useAnnotations } from '~/pages';
 
 //? Annotation states:
 //? 1. Creation - when an unoccupied area of the image is clicked - fades in (circle + input)
@@ -33,41 +32,21 @@ export type AnnotationType = {
   text: string;
   x: number;
   y: number;
-  id: number;
+  id?: number;
 };
 
-export type ClientAnnotationType = Omit<AnnotationType, 'id'>;
-
 export const Annotations = () => {
-  const [pendingCreation, setPendingCreation] = useState(true);
-  const [isActive, setIsActive] = useState(false);
+  const { data: annotations } = useAnnotations();
 
-  const [annotations, setAnnotations] = useState<AnnotationType[]>([]);
+  const [pendingCreation, setPendingCreation] = useState(false);
 
-  const [annotation, setAnnotation] = useState({
-    id: annotations.length,
+  const [annotation, setAnnotation] = useState<AnnotationType>({
+    id: annotations?.length,
     text: '',
     x: 0,
     y: 0,
   });
-
-  const fetchAnnotations = useCallback(() => {
-    fetch('http://localhost:3001/v1' + `/annotations`, {
-      method: 'GET',
-    })
-      .then((resp) => resp.json())
-      .then((data) => {
-        setAnnotations(data);
-        console.log(data);
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
-  }, []);
-
-  useEffect(() => {
-    fetchAnnotations();
-  }, [fetchAnnotations]);
+  console.log(annotations?.length);
 
   return (
     <div className="flex-1 bg-[#1E1E1E] flex">
@@ -81,27 +60,24 @@ export const Annotations = () => {
         <section className="bg-[#2A2A2A] flex justify-center align-center w-full">
           <div className="relative flex">
             <Image
-              isActive={isActive}
-              onSetIsActive={setIsActive}
               annotation={annotation}
               onSetAnnotation={setAnnotation}
               pendingCreation={pendingCreation}
               onSetPendingCreation={setPendingCreation}
             />
-            {isActive && (
+            {annotations && (
               <NewAnnotation
-                onCreationSuccess={fetchAnnotations}
-                number={annotations.length + 1}
-                onSetIsActive={setIsActive}
+                number={annotations?.length + 1}
                 annotation={annotation}
                 onSetAnnotation={setAnnotation}
                 pendingCreation={pendingCreation}
                 onSetPendingCreation={setPendingCreation}
               />
             )}
-            {annotations.map((annotation) => (
-              <Annotation key={annotation.id} annotation={annotation} />
-            ))}
+            {annotations &&
+              annotations.map((annotation, idx) => (
+                <Annotation key={annotation.id} annotation={annotation} index={idx + 1} />
+              ))}
           </div>
         </section>
         <section className="text-xs md:text-base self-start text-[#909090] px-4 lg:px-0">

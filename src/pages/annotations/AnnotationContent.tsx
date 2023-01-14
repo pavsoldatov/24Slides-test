@@ -3,7 +3,7 @@ import { AnnotationType, DeleteIcon } from '~/pages';
 
 interface AnnotationContentProps {
   text: string;
-  id: number;
+  id?: number;
 }
 
 export const AnnotationContent = ({ text, id }: AnnotationContentProps) => {
