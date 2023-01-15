@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { ComponentPropsWithoutRef } from 'react';
+import { ComponentPropsWithoutRef, memo } from 'react';
 import css from './Annotation.module.scss';
 
 interface WrapperProps extends ComponentPropsWithoutRef<'div'> {
@@ -9,7 +9,8 @@ interface WrapperProps extends ComponentPropsWithoutRef<'div'> {
   y: string;
 }
 
-export const Wrapper = ({ isElevated, x, y, children, ...props }: WrapperProps) => {
+export const Wrapper = memo(({ isElevated, x, y, children, ...props }: WrapperProps) => {
+  console.log('wrapper');
   return (
     <div
       className={clsx(css.annotation, isElevated ? 'z-10' : 'z-0', props.className)}
@@ -18,4 +19,4 @@ export const Wrapper = ({ isElevated, x, y, children, ...props }: WrapperProps) 
       {children}
     </div>
   );
-};
+});

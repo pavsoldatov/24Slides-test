@@ -1,6 +1,5 @@
 import clsx from 'clsx';
 import { useState, SyntheticEvent, MouseEvent, Dispatch, SetStateAction } from 'react';
-import annotations from '~/api/annotations';
 import { NewAnnotationType } from '~/pages';
 
 interface ImageProps {
@@ -19,7 +18,6 @@ export const Image = ({ newAnnotation, onSetNewAnnotation }: ImageProps) => {
 
   const addAnnotationHandler = (e: MouseEvent) => {
     onSetNewAnnotation({ ...newAnnotation, isActive: false });
-
     if (!newAnnotation.isActive) {
       onSetNewAnnotation({
         ...newAnnotation,

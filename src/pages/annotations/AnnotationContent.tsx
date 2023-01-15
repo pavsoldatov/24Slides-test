@@ -1,5 +1,6 @@
-import { FormEvent, Dispatch, SetStateAction } from 'react';
-import { AnnotationType, DeleteIcon } from '~/pages';
+import clsx from 'clsx';
+import { FormEvent } from 'react';
+import { DeleteIcon, useDeleteAnnotation, Loader } from '~/pages';
 
 interface AnnotationContentProps {
   text: string;
@@ -7,21 +8,11 @@ interface AnnotationContentProps {
 }
 
 export const AnnotationContent = ({ text, id }: AnnotationContentProps) => {
-  const BASE_URL = 'http://localhost:3001/v1';
+  const mutation = useDeleteAnnotation();
 
   const handleDelete = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    fetch(BASE_URL + `/annotations/${id}`, {
-      method: 'DELETE',
-    })
-      .then((resp) => resp.json())
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
+    id ? mutation.mutate(id) : console.error(`cannot find id: ${id}`);
   };
 
   return (
@@ -36,10 +27,14 @@ export const AnnotationContent = ({ text, id }: AnnotationContentProps) => {
         </div>
       </div>
       <button
+        disabled={mutation.isLoading}
         type="submit"
-        className="absolute top-0 right-0 p-2 m-1 rounded-full hover:bg-neutral-100 active:bg-neutral-200"
+        className={clsx(
+          'absolute top-0 right-0 p-2 m-1 rounded-full',
+          !mutation.isLoading && 'hover:bg-neutral-100 active:bg-neutral-200',
+        )}
       >
-        <DeleteIcon />
+        {mutation.isLoading ? <Loader /> : <DeleteIcon />}
       </button>
     </form>
   );

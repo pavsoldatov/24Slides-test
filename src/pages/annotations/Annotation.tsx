@@ -1,27 +1,41 @@
-import { Dispatch, SetStateAction, useState } from 'react';
-import { AnnotationType, AnnotationContent, CircleButton, Wrapper, Panel } from '~/pages';
+import clsx from 'clsx';
+import { useState, memo, useMemo } from 'react';
+import {
+  AnnotationType,
+  AnnotationContent,
+  CircleButton,
+  Wrapper,
+  Panel,
+  getCoordsInPercent,
+} from '~/pages';
+import css from './Annotation.module.scss';
 
 export interface AnnotationProps {
   annotation: AnnotationType;
-  index: number;
+  isLoading: boolean;
+  number: number;
 }
 
-//* Creation phase logic exists only on client
-
-//TODO Creation form belongs to image
-//TODO AnnotationContent belongs to actual annotation, as well as two states: open/closed.
-
-export const Annotation = ({ annotation, index }: AnnotationProps) => {
-  const coords = { x: annotation.x * 100 + '%', y: annotation.y * 100 + '%' };
-
+export const Annotation = memo(({ annotation, number }: AnnotationProps) => {
+  const { x, y } = useMemo(
+    () => getCoordsInPercent(annotation.x, annotation.y),
+    [annotation.x, annotation.y],
+  );
+  console.log('rerendered');
   const [isOpen, setIsOpen] = useState(false);
+  const handleVisibility = () => setIsOpen(!isOpen);
 
   return (
-    <Wrapper isElevated={isOpen} x={coords.x} y={coords.y}>
-      <CircleButton onOpen={() => setIsOpen(!isOpen)} number={index} />
+    <Wrapper
+      className={clsx(annotation ? css.fadeIn : css.fadeOut)}
+      isElevated={isOpen}
+      x={x}
+      y={y}
+    >
+      <CircleButton onClick={handleVisibility} number={number} />
       <Panel isOpen={isOpen}>
         <AnnotationContent text={annotation.text} id={annotation.id} />
       </Panel>
     </Wrapper>
   );
-};
+});
