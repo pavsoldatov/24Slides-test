@@ -9,8 +9,8 @@ export const NewAnnotation = ({ number }: { number?: number }) => {
   const [isNewAnnotation, setIsNewAnnotation] = useIsNewAnnotation();
 
   const { x, y } = useMemo(
-    () => getCoordsInPercent(newAnnotation.x, newAnnotation.y),
-    [newAnnotation.x, newAnnotation.y],
+    () => getCoordsInPercent(newAnnotation.pos.x, newAnnotation.pos.y),
+    [newAnnotation.pos.x, newAnnotation.pos.y],
   );
 
   const handleClick = () => setIsNewAnnotation(false);

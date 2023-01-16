@@ -1,44 +1,31 @@
 {
   "annotations": [
     {
-      "text": "grass",
-      "x": 0.6542056074766355,
-      "y": 0.6956521739130435,
-      "xInPercent": "65.42056074766354%",
-      "yInPercent": "69.56521739130434%",
-      "id": 5
+      "id": 1,
+      "author": "Josh Dun",
+      "comment": "Please remove this image from the slide.",
+      "pos": {
+        "x": 0.609,
+        "y": 0.6401
+      }
     },
     {
-      "text": "Stairs",
-      "x": 0.23738317757009345,
-      "y": 0.7180925666199158,
-      "xInPercent": "23.738317757009344%",
-      "yInPercent": "71.80925666199158%",
-      "id": 6
+      "id": 2,
+      "author": "Marie Ruecker",
+      "comment": "It doesn't look that good, please put some more creativeness into this.",
+      "pos": {
+        "x": 0.0387,
+        "y": 0.1453
+      }
     },
     {
-      "text": "2323",
-      "x": 0.10841121495327102,
-      "y": 0.3394109396914446,
-      "xInPercent": "10.841121495327103%",
-      "yInPercent": "33.94109396914446%",
-      "id": 9
-    },
-    {
-      "text": "23123",
-      "x": 0.8785046728971962,
-      "y": 0.2482468443197756,
-      "xInPercent": "87.85046728971963%",
-      "yInPercent": "24.82468443197756%",
-      "id": 13
-    },
-    {
-      "text": "12312",
-      "x": 0.8523364485981308,
-      "y": 0.10378681626928471,
-      "xInPercent": "85.23364485981308%",
-      "yInPercent": "10.37868162692847%",
-      "id": 15
+      "id": 3,
+      "author": "Stephen Huels",
+      "comment": "Please change the color to red.",
+      "pos": {
+        "x": 0.1314,
+        "y": 0.3719
+      }
     }
   ]
 }

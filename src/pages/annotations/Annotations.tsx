@@ -10,12 +10,13 @@ import {
 import { NewAnnotationStore } from './context';
 
 export interface AnnotationType {
-  text: string;
-  x: number;
-  y: number;
   id?: number;
-  xInPercent: string;
-  yInPercent: string;
+  author: string;
+  comment: string;
+  pos: {
+    x: number;
+    y: number;
+  };
 }
 
 export const Annotations = () => {

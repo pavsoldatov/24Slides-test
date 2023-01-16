@@ -7,11 +7,12 @@ const NewAnnotationStateCtx = createContext<[boolean, Dispatch<SetStateAction<bo
 ]);
 
 const initialNewAnnotation = {
-  text: '',
-  x: 0,
-  y: 0,
-  xInPercent: '',
-  yInPercent: '',
+  author: '',
+  comment: '',
+  pos: {
+    x: 0,
+    y: 0,
+  },
 };
 
 const NewAnnotationDataCtx = createContext<
