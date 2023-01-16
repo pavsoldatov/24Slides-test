@@ -22,6 +22,7 @@ export const NewAnnotationForm = ({ onSetNewAnnotation, newAnnotation }: NewAnno
   return (
     <form onSubmit={handleCreate} className="flex justify-between gap-[24px]">
       <input
+        ref={inputRef}
         id="comment"
         name="annotationText"
         value={deferredText}
