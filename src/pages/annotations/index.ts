@@ -1,3 +1,4 @@
+export * from './Annotations';
 export * from './AnnotationsList';
 export * from './Annotation';
 export * from './NewAnnotation';

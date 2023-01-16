@@ -1,26 +1,36 @@
 import { useState, useDeferredValue, FormEvent, ChangeEvent } from 'react';
-import { useCreateAnnotation, SendIcon, NewAnnotationProps } from '~/pages';
+import { useCreateAnnotation, SendIcon, useFocus } from '~/pages';
+import { useIsNewAnnotation, useNewAnnotationData } from './context';
 
-interface NewAnnotationFormProps extends Exclude<NewAnnotationProps, 'number'> {}
+export const NewAnnotationForm = () => {
+  const [newAnnotation] = useNewAnnotationData();
+  const [, setIsNewAnnotation] = useIsNewAnnotation();
 
-export const NewAnnotationForm = ({ onSetNewAnnotation, newAnnotation }: NewAnnotationFormProps) => {
+  const inputRef = useFocus<HTMLInputElement>();
+
   const [text, setText] = useState('');
   const deferredText = useDeferredValue(text);
 
   const mutation = useCreateAnnotation();
 
-  const handleCreate = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    mutation.mutate({ text: deferredText, x: newAnnotation.x, y: newAnnotation.y });
+    mutation.mutate({
+      text: deferredText,
+      x: newAnnotation.x,
+      y: newAnnotation.y,
+      xInPercent: newAnnotation.x * 100 + '%',
+      yInPercent: newAnnotation.y * 100 + '%',
+    });
 
-    onSetNewAnnotation({ ...newAnnotation, isActive: false });
+    setIsNewAnnotation(false);
     setText('');
   };
 
   const handleTextChange = (e: ChangeEvent<HTMLInputElement>) => setText(e.target.value);
 
   return (
-    <form onSubmit={handleCreate} className="flex justify-between gap-[24px]">
+    <form onSubmit={handleSubmit} className="flex justify-between gap-[24px]">
       <input
         ref={inputRef}
         id="comment"

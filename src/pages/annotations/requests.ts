@@ -1,6 +1,6 @@
 import { useQuery, useQueryClient, useMutation } from '@tanstack/react-query';
+import { AnnotationType } from '~/pages';
 import axios from '../../api/annotations';
-import { AnnotationType, NewAnnotationType } from './AnnotationsList';
 
 const fetchAnnotations = (): Promise<AnnotationType[]> =>
   axios.get('/annotations').then((response) => response.data);
@@ -22,7 +22,7 @@ export const useAnnotation = (annotationId: number) => {
   });
 };
 
-const createAnnotation = (newAnnotation: NewAnnotationType) =>
+const createAnnotation = (newAnnotation: AnnotationType) =>
   axios.post('/annotations', newAnnotation);
 
 export const useCreateAnnotation = () => {
