@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useRef } from 'react';
 
-export const useRenderHighlight = (className: string) => {
+export const useRenderHighlight = <T extends HTMLElement>(className: string) => {
   // TODO* fix any
-  const ref = useRef<HTMLLIElement>(null);
+  const ref = useRef<T | null>(null);
 
   if (ref.current) {
     ref.current.classList.add(className);

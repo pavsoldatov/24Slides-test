@@ -5,7 +5,7 @@ The purpose of this repo is to give you an environment with a bunch of problems 
 ## Getting Started
 
 1. Install dependencies `npm install`
-2. Launch dev mode `npm run dev`
+2. Launch dev mode `npm run dev` (or `npm run concurrently` to kickstart both the fake server and the client)
 3. Have a look on what is in browser :)
 4. Check the code and TODOs scattered around it
 5. Do tasks in pages

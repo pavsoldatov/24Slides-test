@@ -1,0 +1,23 @@
+.annotation {
+  position: absolute;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ef7058;
+
+  transform: translate(-50%, -50%);
+  border-radius: 9999px;
+}
+
+.fadeIn {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 150ms, visibility 150ms;
+}
+
+.fadeOut {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 150ms, visibility 150ms;
+}

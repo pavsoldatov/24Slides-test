@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link, LinkProps, useMatchRoute } from '@tanstack/react-location';
 import clsx from 'clsx';
 
@@ -22,14 +23,15 @@ const NavItem = (props: LinkProps) => {
 
 export const Header = () => (
   <header className="sticky top-0 w-full z-10">
-    <nav className="bg-gray-600 shadow-lg">
-      <ul className="flex items-center">
+    <nav className="flex bg-gray-600 shadow-lg">
+      <ul className="hidden md:flex items-center flex-row">
         <NavItem to="/">Home</NavItem>
         <NavItem to="/refactor-1">Refactor 1</NavItem>
         <NavItem to="/refactor-2">Refactor 2</NavItem>
         <NavItem to="/optimize-1">Optimize 1</NavItem>
         <NavItem to="/optimize-2">Optimize 2</NavItem>
         <NavItem to="/ranges">Ranges</NavItem>
+        <NavItem to="/annotations">Annotations</NavItem>
       </ul>
     </nav>
   </header>
