@@ -19,7 +19,7 @@ export const AnnotationContent = ({ id, comment, author }: AnnotationContentProp
   return (
     <form onSubmit={handleDelete} className="flex justify-between">
       <div className="flex items-center justify-center gap-2">
-        <div className="flex justify-center self-center bg-[#DB7474] rounded-full h-8 w-8">
+        <div className="flex justify-center self-center bg-[#DB7474] rounded-full h-8 min-w-[32px]">
           <p className="text-sm text-[#FDD5D5] font-semibold self-center leading-4">HP</p>
         </div>
         <div>

@@ -19,20 +19,13 @@ export const Image = () => {
 
     if (!isNewAnnotation) {
       setIsNewAnnotation(true);
-      console.log(newAnnotation)
       setNewAnnotation({
         ...newAnnotation,
         pos: {
           x: e.nativeEvent.offsetX / dimensions.width,
-          y: e.nativeEvent.offsetY / dimensions.width,
+          y: e.nativeEvent.offsetY / dimensions.height,
         },
       });
-
-      // setNewAnnotation({
-      //   ...newAnnotation,
-      //   x: e.nativeEvent.offsetX / dimensions.width,
-      //   y: e.nativeEvent.offsetY / dimensions.height,
-      // });
     }
   };
 
