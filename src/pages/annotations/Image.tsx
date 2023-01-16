@@ -21,8 +21,10 @@ export const Image = () => {
       setIsNewAnnotation(true);
       setNewAnnotation({
         ...newAnnotation,
-        x: e.nativeEvent.offsetX / dimensions.width,
-        y: e.nativeEvent.offsetY / dimensions.height,
+        pos: {
+          x: e.nativeEvent.offsetX / dimensions.width,
+          y: e.nativeEvent.offsetY / dimensions.height,
+        },
       });
     }
   };

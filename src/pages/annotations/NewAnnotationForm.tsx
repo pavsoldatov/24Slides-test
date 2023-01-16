@@ -1,4 +1,4 @@
-import { useState, useDeferredValue, FormEvent, ChangeEvent } from 'react';
+import { FormEvent } from 'react';
 import { useCreateAnnotation, SendIcon, useFocus } from '~/pages';
 import { useIsNewAnnotation, useNewAnnotationData } from './context';
 
@@ -8,35 +8,31 @@ export const NewAnnotationForm = () => {
 
   const inputRef = useFocus<HTMLInputElement>();
 
-  const [text, setText] = useState('');
-  const deferredText = useDeferredValue(text);
-
   const mutation = useCreateAnnotation();
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const formJson = Object.fromEntries(new FormData(e.currentTarget).entries());
+
     mutation.mutate({
-      text: deferredText,
-      x: newAnnotation.x,
-      y: newAnnotation.y,
-      xInPercent: newAnnotation.x * 100 + '%',
-      yInPercent: newAnnotation.y * 100 + '%',
+      comment: formJson.comment.toString(),
+      author: 'Harry Potter',
+      pos: {
+        x: newAnnotation.pos.x,
+        y: newAnnotation.pos.y,
+      },
     });
 
     setIsNewAnnotation(false);
-    setText('');
+    e.currentTarget.reset();
   };
-
-  const handleTextChange = (e: ChangeEvent<HTMLInputElement>) => setText(e.target.value);
 
   return (
     <form onSubmit={handleSubmit} className="flex justify-between gap-[24px]">
       <input
         ref={inputRef}
         id="comment"
-        name="annotationText"
-        value={deferredText}
-        onChange={handleTextChange}
+        name="comment"
         placeholder="Leave a comment"
         className="w-full p-2 text-sm border-b-[2px] border-b-[#C9CBD0] outline-none"
       />
