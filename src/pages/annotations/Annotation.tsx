@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { useState, memo, useMemo, Dispatch, SetStateAction } from 'react';
+import { useMemo, Dispatch, SetStateAction } from 'react';
 import {
   AnnotationType,
   AnnotationContent,
@@ -7,26 +7,23 @@ import {
   Wrapper,
   Panel,
   getCoordsInPercent,
+  useSyncAnnotationToggle,
 } from '~/pages';
 import css from './Annotation.module.scss';
 
 export interface AnnotationProps {
   annotation: AnnotationType;
   number: number;
-  isActive: boolean;
+  activeId: number;
   setActiveId: Dispatch<SetStateAction<number>>;
 }
 
-export const Annotation = ({ annotation, number, isActive, setActiveId }: AnnotationProps) => {
-  const { id, comment, author, pos } = annotation;
+export const Annotation = ({ annotation, number, activeId, setActiveId }: AnnotationProps) => {
+  const { id: currentId, comment, author, pos } = annotation;
+
   const { x, y } = useMemo(() => getCoordsInPercent(pos.x, pos.y), [pos.x, pos.y]);
 
-  const [isOpen, setIsOpen] = useState(false);
-  const handleVisibility = () => {
-    setActiveId(id!);
-    console.log(id);
-    isActive ? setIsOpen(false) : setIsOpen(true);
-  };
+  const [handleVisibility, isOpen] = useSyncAnnotationToggle(currentId!, activeId, setActiveId);
 
   return (
     <Wrapper
@@ -36,7 +33,7 @@ export const Annotation = ({ annotation, number, isActive, setActiveId }: Annota
     >
       <CircleButton onClick={handleVisibility} number={number} />
       <Panel isOpen={isOpen}>
-        <AnnotationContent id={id} comment={comment} author={author} />
+        <AnnotationContent id={currentId} comment={comment} author={author} />
       </Panel>
     </Wrapper>
   );

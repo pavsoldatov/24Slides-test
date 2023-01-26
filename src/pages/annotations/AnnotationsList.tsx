@@ -14,7 +14,7 @@ export const AnnotationsList = ({ annotations }: AnnotationsListProps) => {
           key={annotation.id}
           annotation={annotation}
           number={idx + 1}
-          isActive={activeId === annotation.id}
+          activeId={activeId}
           setActiveId={setActiveId}
         />
       ))}

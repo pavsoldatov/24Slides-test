@@ -9,6 +9,6 @@ export * from './CircleButton';
 export * from './Icons';
 export * from './Wrapper';
 export * from './Panel';
-export * from './Loader'
+export * from './Loader';
 export * from './requests';
 export * from './utils';
