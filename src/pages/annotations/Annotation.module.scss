@@ -13,11 +13,11 @@
 .fadeIn {
   opacity: 1;
   visibility: visible;
-  transition: opacity 150ms, visibility 150ms;
+  transition: opacity 125ms, visibility 125ms;
 }
 
 .fadeOut {
   opacity: 0;
   visibility: hidden;
-  transition: opacity 150ms, visibility 150ms;
+  transition: opacity 125ms, visibility 125ms;
 }
