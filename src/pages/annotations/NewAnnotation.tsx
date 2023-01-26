@@ -14,8 +14,7 @@ export const NewAnnotation = ({ number }: { number?: number }) => {
 
   return (
     <Wrapper
-      className={clsx(isNewAnnotation ? css.fadeIn : css.fadeOut)}
-      isElevated={true}
+      className={clsx(isNewAnnotation ? `${css.fadeIn} z-[4]` : `${css.fadeOut} z-[0]`)}
       x={x}
       y={y}
     >

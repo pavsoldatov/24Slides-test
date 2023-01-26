@@ -30,8 +30,7 @@ export const Annotation = ({ annotation, number, isActive, setActiveId }: Annota
 
   return (
     <Wrapper
-      className={clsx(annotation ? css.fadeIn : css.fadeOut)}
-      isElevated={isOpen}
+      className={clsx(annotation ? css.fadeIn : css.fadeOut, isOpen ? 'z-[2]' : 'z-[0]')}
       x={x}
       y={y}
     >
