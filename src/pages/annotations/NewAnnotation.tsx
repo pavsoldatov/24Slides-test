@@ -5,13 +5,10 @@ import { useIsNewAnnotation, useNewAnnotationData } from './context';
 import css from './Annotation.module.scss';
 
 export const NewAnnotation = ({ number }: { number?: number }) => {
-  const [newAnnotation] = useNewAnnotationData();
   const [isNewAnnotation, setIsNewAnnotation] = useIsNewAnnotation();
 
-  const { x, y } = useMemo(
-    () => getCoordsInPercent(newAnnotation.pos.x, newAnnotation.pos.y),
-    [newAnnotation.pos.x, newAnnotation.pos.y],
-  );
+  const [{ pos }] = useNewAnnotationData();
+  const { x, y } = useMemo(() => getCoordsInPercent(pos.x, pos.y), [pos.x, pos.y]);
 
   const handleClick = () => setIsNewAnnotation(false);
 

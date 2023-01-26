@@ -11,7 +11,7 @@ export const Panel = ({ isOpen, children, onClick }: PanelProps) => {
     <div
       className={clsx(
         isOpen ? css.fadeIn : css.fadeOut,
-        'absolute -translate-x-1/2 -translate-y-1/2 top-[84px] left-[50%] px-4 py-4 min-w-[360px] text-neutral-900 text-sx bg-white drop-shadow border-[1px] border-solid border-[#EFEFF0] rounded',
+        'absolute -translate-x-1/2 top-[52px] left-[50%] px-4 py-4 min-w-[360px] text-neutral-900 text-sx bg-white drop-shadow border-[1px] border-solid border-[#EFEFF0] rounded',
       )}
       onClick={onClick}
     >

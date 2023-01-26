@@ -20,7 +20,7 @@ export const dataSample = {
 type Color = typeof colors[number];
 
 // TODO* could we use inferred items type here?
-export type Item = typeof items[number]
+export type Item = typeof items[number];
 
 export interface Range {
   start: string;
