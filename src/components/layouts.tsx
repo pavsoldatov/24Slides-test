@@ -1,6 +1,18 @@
 import clsx from 'clsx';
 import { ReactNode } from 'react';
 
+export const FlexWrapper = ({
+  className,
+  children,
+}: {
+  className?: string;
+  children: ReactNode;
+}) => <div className={clsx('flex flex-col align-center min-h-screen', className)}>{children}</div>;
+
+export const Main = ({ className, children }: { className?: string; children: ReactNode }) => (
+  <main className={clsx('flex-1 flex flex-col', className)}>{children}</main>
+);
+
 export const CenteredLayout = ({
   className,
   children,
@@ -8,11 +20,11 @@ export const CenteredLayout = ({
   className?: string;
   children: ReactNode;
 }) => (
-  // TODO is there a better way to fill available remaining height?
+  //* TODO is there a better way to fill available remaining height?
   // scroll height seems bugged :\
   <div
     className={clsx(
-      'flex flex-col items-center justify-center h-[calc(100vh-48px)] pb-32 text-slate-700',
+      'flex-1 flex sm:flex-col flex-col-reverse items-center justify-center text-slate-700',
       className,
     )}
   >

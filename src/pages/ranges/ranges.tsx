@@ -7,7 +7,28 @@ const items = untypedItems as Item[];
 const ranges = untypedRanges as Range[];
 
 const transform = (items: Item[]) => {
-  // TODO implement
+  //* TODO implement
+
+  const ranges: Range[] = [];
+
+  let startDate = items[0].date;
+
+  for (let i = 0; i < items.length; i++) {
+    const current = items[i];
+    const next = items[i + 1];
+
+    const isRangeEnd = !next || current.color !== next.color;
+
+    if (isRangeEnd) {
+      ranges.push({
+        start: startDate,
+        end: current.date,
+        color: current.color,
+      });
+
+      startDate = next ? next.date : current.date;
+    }
+  }
 
   return ranges;
 };
@@ -31,7 +52,7 @@ const RangesView = ({ ranges }: { ranges: Range[] }) => (
 
 export const Ranges = () => {
   return (
-    <div className="max-w-screen-xl mx-auto py-4 grid grid-cols-3 gap-8">
+    <div className="w-full max-w-screen-xl mx-auto py-4 grid grid-cols-3 gap-8">
       <div className="col-span-3">
         <h2 className="text-2xl mb-4">Convert adjacent items of same type into ranges</h2>
         <p>The data of individual item should look like this: </p>

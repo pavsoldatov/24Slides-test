@@ -1,7 +1,8 @@
 import { Outlet, ReactLocation, Route, Router } from '@tanstack/react-location';
-import { CenteredLayout } from '~/components';
-import { Optimize1, Optimize2, Ranges, Refactor1, Refactor2 } from '~/pages';
-import { Header } from './header';
+import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
+import { Header } from '~/app';
+import { CenteredLayout, FlexWrapper, Main } from '~/components';
+import { Annotations, Optimize1, Optimize2, Ranges, Refactor1, Refactor2 } from '~/pages';
 
 const Welcome = () => (
   <CenteredLayout className="gap-4">
@@ -37,11 +38,23 @@ const routes: Route[] = [
     path: 'ranges',
     element: <Ranges />,
   },
+  {
+    path: 'annotations',
+    element: <Annotations />,
+  },
 ];
 
+const queryClient = new QueryClient();
+
 export const App = () => (
-  <Router location={reactLocation} routes={routes}>
-    <Header />
-    <Outlet />
-  </Router>
+  <QueryClientProvider client={queryClient}>
+    <Router location={reactLocation} routes={routes}>
+      <FlexWrapper>
+        <Header />
+        <Main>
+          <Outlet />
+        </Main>
+      </FlexWrapper>
+    </Router>
+  </QueryClientProvider>
 );
