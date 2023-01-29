@@ -7,6 +7,7 @@ It has all TODOs done, including the Annotations page with some minor post-inter
 Feel free to copy, tweak, play around with it. It will get you to the interview stage (unless the test requirements change).
 
 If I saved you time, you can buy me a coffee at https://www.buymeacoffee.com/pavsoldatov
+
 For questions, you can write in at pavlo.soldatov92@gmail.com
 
 ## Getting Started
