@@ -10,3 +10,6 @@ Completed tasks (TODOs) are marked with an asterisk "*".
 1. Install dependencies `npm install`
 2. `npm run concurrently` to kickstart both the fake server and the client (or launch dev mode with `npm run dev`)
 3. The fake server has 350ms delay to emulate the server response. Look for `-d 350` flag inside package.json to change it.
+
+## Preview
+![Alt text](/Fix-todos/test-task/public/preview.jpg "Preview image")
