@@ -12,4 +12,4 @@ Completed tasks (TODOs) are marked with an asterisk "*".
 3. The fake server has 350ms delay to emulate the server response. Look for `-d 350` flag inside package.json to change it.
 
 ## Preview
-![Alt text](/Fix-todos/test-task/public/preview.jpg "Preview image")
+![preview](https://user-images.githubusercontent.com/80415302/231215581-d7463b19-ba26-4111-bf81-4947e88daa02.jpg)
